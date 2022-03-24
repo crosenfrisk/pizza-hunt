@@ -17,7 +17,9 @@ function getPizza() {
   // get pizzaInfo
   fetch(`/api/pizzas/${pizzaId}`)
     .then(response => {
+      console.log(response);
       if (!response.ok) {
+        console.log('hi');
         throw new Error({ message: 'Something went wrong!' });
       }
 
@@ -109,7 +111,7 @@ function handleNewCommentSubmit(event) {
   }
 
   const formData = { commentBody, writtenBy };
-  
+
   fetch(`/api/comments/${pizzaId}`, {
     method: 'POST',
     headers: {
@@ -126,7 +128,7 @@ function handleNewCommentSubmit(event) {
     })
     .then(commentResponse => {
       console.log(commentResponse);
-      location.reload();
+      // location.reload();
     })
     .catch(err => {
       console.log(err);
@@ -178,7 +180,7 @@ $backBtn.addEventListener('click', function() {
   window.history.back();
 });
 
-getPizza();
-
 $newCommentForm.addEventListener('submit', handleNewCommentSubmit);
 $commentSection.addEventListener('submit', handleNewReplySubmit);
+
+getPizza();
